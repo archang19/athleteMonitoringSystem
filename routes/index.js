@@ -137,13 +137,13 @@ router.post("/log", function(req, res) {
 
 router.get("/log/:usrname", isLoggedIn, function(req, res){
 	console.log(req.params.usrname);
-	Log.find({author: req.user.username}, null, {sort: {created: -1}}, function(err, l) {
+	Log.find({author: req.params.usrname}, null, {sort: {created: -1}}, function(err, l) {
 		if (err) {
 			console.log(err);
 		}
 		else {
       console.log(l);
-			res.render("log", {log: l, username: req.user.username} );
+			res.render("log", {log: l, username: req.params.usrname} );
 		}
 
 	});    

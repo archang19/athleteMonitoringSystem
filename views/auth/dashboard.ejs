@@ -10,7 +10,7 @@
 <h2>My Athletes: </h2>
 <ul>
 <% athletes.forEach(function(athlete){ %>
-	<li> <%= athlete.firstName %> <%= athlete.lastName %> </li>
+	<a href="/log/<%= athlete.username %>" > <%= athlete.firstName %> <%= athlete.lastName %> </a>
  <% }); %>
  </ul>
 
