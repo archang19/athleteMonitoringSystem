@@ -3,10 +3,14 @@
 <h1>New User Registration</h1>
 
 <form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username"><br>
+    <input type="text" name="username" placeholder="username">
     <input type="password" name="password" placeholder="password"><br>
-    <input type="text" name="firstName" placeholder="firstName"><br>
+
+    <input type="text" name="firstName" placeholder="firstName">
     <input type="text" name="lastName" placeholder="lastName"><br>
     <button>Submit</button>
 </form>
+<br></br>
+<p style="display:inline"> Already a current user? </p>
+<a href="/login">Login</a>
 <%- include ../partials/footer -%> 

@@ -1,8 +1,9 @@
 <%- include partials/header -%> 
 
-<h1>Log</h1>
+<h1> <%= username %>'s log</h1>
 
 <% log.forEach(function(l){ %>
+	<p> Created At: <%= l.created %> </p>
 	<% l.description.forEach(function(e) { %>
 		<p><%= e %> </p>
 	<% }) %>

@@ -50,12 +50,11 @@ router.get("/dashboard", isLoggedIn, function(req, res){
   ])
   .then(results=>{
     //results return an array
-
     const [athletes, coaches] = results;
-
     console.log("athletes",athletes);
     console.log("coaches",coaches);
-    res.render("auth/dashboard", {athletes: athletes, coaches: coaches}); 
+    console.log(req.user.username);
+    res.render("auth/dashboard", {athletes: athletes, coaches: coaches, username: req.user.username}); 
   })
   .catch(err=>{
     console.error("Something went wrong",err);
@@ -121,6 +120,7 @@ router.post("/log", function(req, res) {
 				}
 				else {
 					l.author= req.user.username;
+          l.created = new Date().toISOString();
 					l.save();
 					console.log(l);
 					console.log(usr);
@@ -135,15 +135,15 @@ router.post("/log", function(req, res) {
 });
 
 
-router.get("/log/:usrname", function(req, res){
+router.get("/log/:usrname", isLoggedIn, function(req, res){
 	console.log(req.params.usrname);
-	Log.find({author: req.user.username}, function(err, l) {
+	Log.find({author: req.user.username}, null, {sort: {created: -1}}, function(err, l) {
 		if (err) {
 			console.log(err);
 		}
 		else {
       console.log(l);
-			res.render("log", {log: l} );
+			res.render("log", {log: l, username: req.user.username} );
 		}
 
 	});    
