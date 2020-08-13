@@ -1,12 +1,15 @@
 <%- include partials/header -%> 
 
-<h1> <%= username %>'s log</h1>
+<h1> <%= username %>'s training log</h1>
 
 <% log.forEach(function(l){ %>
-	<p> Created At: <%= l.created %> </p>
+<div class = "log">
+	<p> <%= l.name %> </p>
+	<p class = "logDate"> Created At: <%= l.created %> </p>
 	<% l.description.forEach(function(e) { %>
 		<p><%= e %> </p>
 	<% }) %>
+	</div>
 <% }) %>
 
 <%- include partials/footer -%> 

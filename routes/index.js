@@ -114,7 +114,7 @@ router.post("/log", function(req, res) {
       }
       desc.push(curDesc);
 
-			Log.create({description: desc}, function (err, l) {
+			Log.create({description: desc, name: req.body.name}, function (err, l) {
 				if (err) {
 					console.log(err);
 				}

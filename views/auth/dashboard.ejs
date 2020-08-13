@@ -24,7 +24,9 @@
 <h2>My Training</h2>
 <a href="/log/<%= username %>" >View my training log</a>
 <form action="/log" method="POST">
-  <textarea name="log" cols="40" rows="5"></textarea>
+  <textarea name="log" cols="40" rows="5" required></textarea>
+  <br>
+  <input type="text" name="name" placeholder="Name of Workout" required>
   <button>Submit!</button>
 </form>
 

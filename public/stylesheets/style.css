@@ -1,21 +1,19 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 500px;
+  margin: auto;
 }
 
 a {
   color: #00B7FF;
 }
 
-.feedPost {
-	padding-top: 25px;
-	padding-bottom: 25px;
+.log {
+	border: 1px solid black;
+	margin-bottom: 25px;
 }
 
-.tweeter {
-	font-weight: bold;
-}
-
-.timeOfTweet {
+.logDate {
 	font-style: italic;
 }
