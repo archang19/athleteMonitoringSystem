@@ -1,5 +1,4 @@
-# Athlete Management System
+# Athlete Monitoringt System
 
-A web application for coaches and athletes to track training sessions.
-
-Utilized: MongoDB, Express JS, Node JS
+A web application for coaches to monitor their athletes' training, built using 
+MongoDB, Express JS, and Node JS.
