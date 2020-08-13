@@ -134,7 +134,6 @@ router.post("/log", function(req, res) {
 	});
 });
 
-
 router.get("/log/:usrname", isLoggedIn, function(req, res){
 	console.log(req.params.usrname);
 	Log.find({author: req.params.usrname}, null, {sort: {created: -1}}, function(err, l) {
@@ -145,7 +144,6 @@ router.get("/log/:usrname", isLoggedIn, function(req, res){
       console.log(l);
 			res.render("log", {log: l, username: req.params.usrname} );
 		}
-
 	});    
 });
 

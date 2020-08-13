@@ -1,34 +1,32 @@
 <%- include ../partials/header -%> 
 
-<h1>Dashboard</h1>
-
+<h1>u/<%= username %>'s dashboard</h1>
+<a href="/logout">Logout</a>
+<h3>My Athletes: </h2>
 <form action="/dashboard" method="POST">
 <input type="text" name="athleteUsername" placeholder="athlete's username">
 <button>Add Athlete</button>
 </form>
-
-<h2>My Athletes: </h2>
 <ul>
 <% athletes.forEach(function(athlete){ %>
 	<a href="/log/<%= athlete.username %>" > <%= athlete.firstName %> <%= athlete.lastName %> </a>
  <% }); %>
  </ul>
 
-<h2>My Coaches: </h2>
+<h3>My Coaches: </h2>
 <ul>
 <% coaches.forEach(function(coach){ %>
-	<li> <%= coach.firstName %> <%= coach.lastName %> </li>
+	<a href="/log/<%= coach.username %>" > <%= coach.firstName %> <%= coach.lastName %> </a>
  <% }); %>
  </ul>
 
-<h2>My Training</h2>
-<a href="/log/<%= username %>" >View my training log</a>
+<h3>My Training: </h2>
 <form action="/log" method="POST">
-  <textarea name="log" cols="40" rows="5" required></textarea>
+  <textarea name="log" cols="40" rows="5" required>5x5 Squat with Belt</textarea>
   <br>
   <input type="text" name="name" placeholder="Name of Workout" required>
-  <button>Submit!</button>
+  <button>Log Training</button>
 </form>
+<a href="/log/<%= username %>" >View Training Log</a>
 
-<a href="/logout">Logout</a>
 <%- include ../partials/footer -%> 
