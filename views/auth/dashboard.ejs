@@ -1,0 +1,21 @@
+<%- include ../partials/header -%> 
+
+<h1>Dashboard</h1>
+<a href="/logout">Logout</a>
+<form action="/dashboard" method="POST">
+<input type="text" name="athleteUsername" placeholder="athlete's username">
+<button>Add Athlete</button>
+</form>
+
+<h2>My Athletes: </h2>
+<% athletes.forEach(function(athlete){ %>
+	<p> <%= athlete.firstName %> <%= athlete.lastName %> </p>
+ <% }); %>
+
+<h2>My Coaches: </h2>
+<% coaches.forEach(function(coach){ %>
+	<p> <%= coach.firstName %> <%= coach.lastName %> </p>
+ <% }); %>
+
+
+<%- include ../partials/footer -%> 
