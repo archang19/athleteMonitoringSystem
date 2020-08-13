@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema;
 
 var LogSchema = Schema({
-	description: String, 
+	description: [String], 
 	author: String,
 });
 

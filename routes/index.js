@@ -102,7 +102,20 @@ router.post("/log", function(req, res) {
 			res.redirect("/");
 		}
 		else {
-			Log.create({description: req.body.log}, function (err, l) {
+      var desc = [];
+      var curDesc = "";
+      for (var k = 0; k < req.body.log.length; k++) {
+        if (req.body.log[k] == '\n' || req.body.log[k] == '\r') {
+          desc.push(curDesc);
+          curDesc = "";
+        }
+        else {
+          curDesc += req.body.log[k];
+        }
+      }
+      desc.push(curDesc);
+
+			Log.create({description: desc}, function (err, l) {
 				if (err) {
 					console.log(err);
 				}
@@ -129,22 +142,11 @@ router.get("/log/:usrname", function(req, res){
 			console.log(err);
 		}
 		else {
+      console.log(l);
 			res.render("log", {log: l} );
 		}
 
-	});
-
-	// User.findOne({username: req.params.usrname}, function(err, usr) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 		res.redirect("/");
-	// 	}
-	// 	else {
-	// 		console.log(usr.log);
-	// 		res.render("log", {usr: usr} );
-	// 	}
-	// });
-    
+	});    
 });
 
 function isLoggedIn(req, res, next){

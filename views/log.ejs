@@ -3,10 +3,9 @@
 <h1>Log</h1>
 
 <% log.forEach(function(l){ %>
-                            <p>
-                                <%= l.description %> 
-                            </p>
-
-                <% }) %>
+	<% l.description.forEach(function(e) { %>
+		<p><%= e %> </p>
+	<% }) %>
+<% }) %>
 
 <%- include partials/footer -%> 
