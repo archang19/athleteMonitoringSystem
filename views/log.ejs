@@ -1,0 +1,12 @@
+<%- include partials/header -%> 
+
+<h1>Log</h1>
+
+<% log.forEach(function(l){ %>
+                            <p>
+                                <%= l.description %> 
+                            </p>
+
+                <% }) %>
+
+<%- include partials/footer -%> 

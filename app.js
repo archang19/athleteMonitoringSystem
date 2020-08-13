@@ -14,8 +14,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 
 var User = require("./models/user");
-var Slot = require("./models/slot");
-var Workout = require("./models/workout");
+var Log = require("./models/log");
 
 var indexRouter = require('./routes/index');
 

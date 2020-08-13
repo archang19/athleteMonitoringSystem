@@ -7,7 +7,13 @@ var UserSchema = Schema({
 	firstName: String,
 	lastName: String,
 	coaches: [String],
-	athletes: [String]
+	athletes: [String],
+	log: [
+	{
+		type: Schema.Types.ObjectId,
+		ref: "Log"
+	}
+	]
 });
 
 UserSchema.plugin(passportLocalMongoose);

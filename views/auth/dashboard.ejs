@@ -1,21 +1,30 @@
 <%- include ../partials/header -%> 
 
 <h1>Dashboard</h1>
-<a href="/logout">Logout</a>
+
 <form action="/dashboard" method="POST">
 <input type="text" name="athleteUsername" placeholder="athlete's username">
 <button>Add Athlete</button>
 </form>
 
 <h2>My Athletes: </h2>
+<ul>
 <% athletes.forEach(function(athlete){ %>
-	<p> <%= athlete.firstName %> <%= athlete.lastName %> </p>
+	<li> <%= athlete.firstName %> <%= athlete.lastName %> </li>
  <% }); %>
+ </ul>
 
 <h2>My Coaches: </h2>
+<ul>
 <% coaches.forEach(function(coach){ %>
-	<p> <%= coach.firstName %> <%= coach.lastName %> </p>
+	<li> <%= coach.firstName %> <%= coach.lastName %> </li>
  <% }); %>
+ </ul>
 
+<form action="/log" method="POST">
+  <input type="text" name="log" placeholder="squat 5x5">
+  <button>Submit!</button>
+</form>
 
+<a href="/logout">Logout</a>
 <%- include ../partials/footer -%> 

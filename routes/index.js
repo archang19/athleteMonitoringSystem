@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require("passport");
 var router = express.Router();
 var User = require("../models/user");
+var Log = require("../models/log");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -91,6 +92,59 @@ router.post("/dashboard", function(req, res) {
         });
     }
 });
+});
+
+
+router.post("/log", function(req, res) {
+	User.findOne({username: req.user.username}, function(err, usr) {
+		if (err) {
+			console.log(err);
+			res.redirect("/");
+		}
+		else {
+			Log.create({description: req.body.log}, function (err, l) {
+				if (err) {
+					console.log(err);
+				}
+				else {
+					l.author= req.user.username;
+					l.save();
+					console.log(l);
+					console.log(usr);
+					usr.log.push(l);
+					usr.save();
+					console.log(usr);
+					res.redirect("/dashboard");
+				}
+			});
+		}
+	});
+});
+
+
+router.get("/log/:usrname", function(req, res){
+	console.log(req.params.usrname);
+	Log.find({author: req.user.username}, function(err, l) {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			res.render("log", {log: l} );
+		}
+
+	});
+
+	// User.findOne({username: req.params.usrname}, function(err, usr) {
+	// 	if (err) {
+	// 		console.log(err);
+	// 		res.redirect("/");
+	// 	}
+	// 	else {
+	// 		console.log(usr.log);
+	// 		res.render("log", {usr: usr} );
+	// 	}
+	// });
+    
 });
 
 function isLoggedIn(req, res, next){
