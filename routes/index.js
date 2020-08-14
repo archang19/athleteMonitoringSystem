@@ -3,6 +3,7 @@ var passport = require("passport");
 var router = express.Router();
 var User = require("../models/user");
 var Log = require("../models/log");
+var mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -188,6 +189,28 @@ router.post("/updateLog/:id", isLoggedIn, function(req, res) {
         l.save();
         console.log(l);
         res.redirect("/log/" + l.author);
+      }
+    }); 
+});
+
+router.post("/deleteLog/:id", isLoggedIn, function(req, res) {
+    console.log("DELETE");
+    console.log(req.params.id);
+    Log.findById(req.params.id, function(err, l) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        var a = l.author;
+        l.remove(err => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.redirect("/log/" + a);
+          }
+        })
+        
       }
     }); 
 });
