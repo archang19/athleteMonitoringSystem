@@ -1,4 +1,4 @@
-<%- include partials/header -%> 
+<%- include ../partials/header -%> 
 
 <h1> u/<%= username %>'s training log</h1>
 
@@ -9,13 +9,13 @@
 	<% l.description.forEach(function(e) { %>
 		<p><%= e %> </p>
 	<% }) %>
-	<form action="/updateLog/<%= l._id %>" method="GET">
+	<form action="/log/<%= l.author %>/updateLog/<%= l._id %>" method="GET">
 	<button>Update</button>
 	</form>
-	<form action="/deleteLog/<%= l._id %>" method="POST">
+	<form action="/log/<%= l.author %>/deleteLog/<%= l._id %>" method="POST">
 	<button>Delete</button>
 	</form>
 	</div>
 <% }) %>
 
-<%- include partials/footer -%> 
+<%- include ../partials/footer -%> 

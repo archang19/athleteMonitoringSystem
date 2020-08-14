@@ -148,7 +148,7 @@ router.get("/log/:usrname", isLoggedIn, function(req, res){
 	});    
 });
 
-router.get("/updateLog/:id", isLoggedIn, function(req, res){
+router.get("/log/:usrname/updateLog/:id", isLoggedIn, function(req, res){
     console.log("GET");
     console.log(req.params.id);
 
@@ -157,12 +157,12 @@ router.get("/updateLog/:id", isLoggedIn, function(req, res){
         console.log(err);
       }
       else {
-        res.render("updateLog", {log: l});
+        res.render("log/updateLog", {log: l});
       }
     });    
 });
 
-router.post("/updateLog/:id", isLoggedIn, function(req, res) {
+router.post("/log/:usrname/updateLog/:id", isLoggedIn, function(req, res) {
     console.log("PATCH");
     console.log(req.params.id);
     Log.findById(req.params.id, function(err, l) {
@@ -193,7 +193,7 @@ router.post("/updateLog/:id", isLoggedIn, function(req, res) {
     }); 
 });
 
-router.post("/deleteLog/:id", isLoggedIn, function(req, res) {
+router.post("/log/:usrname/deleteLog/:id", isLoggedIn, function(req, res) {
     console.log("DELETE");
     console.log(req.params.id);
     Log.findById(req.params.id, function(err, l) {
