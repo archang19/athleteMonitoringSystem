@@ -4,8 +4,8 @@ var LogSchema = Schema({
 	description: [String], 
 	author: String,
 	name: String,
-	created: Date
+	created: Date,
+	completed: String,
 });
-
 
 module.exports = mongoose.model('Log', LogSchema);

@@ -10,10 +10,14 @@ a {
 }
 
 .log {
-	border: 1px solid black;
 	margin-bottom: 25px;
 }
 
 .logDate {
 	font-style: italic;
+}
+
+th, td {
+	border: 1px solid black;
+	width: 500px;
 }

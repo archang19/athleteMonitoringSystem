@@ -24,7 +24,7 @@ router.post("/", function(req, res) {
       }
       desc.push(curDesc);
 
-			Log.create({description: desc, name: req.body.name}, function (err, l) {
+			Log.create({description: desc, name: req.body.name, completed: req.body.completed}, function (err, l) {
 				if (err) {
 					console.log(err);
 				}

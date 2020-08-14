@@ -1,11 +1,18 @@
 <%- include ../partials/header -%> 
 
 <h1> u/<%= username %>'s training log</h1>
-
+<a href="/dashboard">Back to dashboard</a>
 <% log.forEach(function(l){ %>
 <div class = "log">
-	<p> <%= l.name %> </p>
-	<p class = "logDate"> Created At: <%= l.created %> </p>
+	<table>
+	<tr>
+	<td> Session: <%= l.name %> </td>
+	</tr>
+	<tr>
+	<td> Completed: <%= l.completed %> </td>
+	</tr>
+	<tr>
+	<td>
 	<% l.description.forEach(function(e) { %>
 		<p><%= e %> </p>
 	<% }) %>
@@ -15,7 +22,12 @@
 	<form action="/log/<%= l.author %>/deleteLog/<%= l._id %>" method="POST">
 	<button>Delete</button>
 	</form>
-	</div>
+	</td>
+	</tr>
+
+	</table>
+</div>
+
 <% }) %>
 
 <%- include ../partials/footer -%> 
