@@ -3,15 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var mongoose = require('mongoose'), Schema = mongoose.Schema;
-var mongoDB = 'mongodb://127.0.0.1/my_database';
-mongoose.connect(mongoDB, { useNewUrlParser: true });
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
+
 
 var User = require("./models/user");
 var Log = require("./models/log");
@@ -20,6 +15,10 @@ var indexRouter = require('./routes/index');
 var dashBoardRouter = require("./routes/dashboard");
 var logRouter = require("./routes/log");
 
+var mongoDB = 'mongodb://127.0.0.1/my_database';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var app = express();
 // view engine setup
