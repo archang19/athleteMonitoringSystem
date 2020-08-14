@@ -17,6 +17,9 @@ var User = require("./models/user");
 var Log = require("./models/log");
 
 var indexRouter = require('./routes/index');
+var dashBoardRouter = require("./routes/dashboard");
+var logRouter = require("./routes/log");
+
 
 var app = express();
 // view engine setup
@@ -43,6 +46,9 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
+app.use("/dashboard", dashBoardRouter);
+app.use("/log", logRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
