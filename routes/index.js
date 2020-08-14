@@ -147,6 +147,51 @@ router.get("/log/:usrname", isLoggedIn, function(req, res){
 	});    
 });
 
+router.get("/updateLog/:id", isLoggedIn, function(req, res){
+    console.log("GET");
+    console.log(req.params.id);
+
+    Log.findById(req.params.id, function(err, l) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.render("updateLog", {log: l});
+      }
+    });    
+});
+
+router.post("/updateLog/:id", isLoggedIn, function(req, res) {
+    console.log("PATCH");
+    console.log(req.params.id);
+    Log.findById(req.params.id, function(err, l) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        var desc = [];
+        console.log(l);
+        var curDesc = "";
+        console.log(req.body.log);
+        for (var k = 0; k < req.body.log.length; k++) {
+          if (req.body.log[k] == '\n' || req.body.log[k] == '\r') {
+            desc.push(curDesc);
+            curDesc = "";
+          }
+          else {
+            curDesc += req.body.log[k];
+          }
+        }
+        desc.push(curDesc);
+        l.name = req.body.name;
+        l.description = desc;
+        l.save();
+        console.log(l);
+        res.redirect("/log/" + l.author);
+      }
+    }); 
+});
+
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();

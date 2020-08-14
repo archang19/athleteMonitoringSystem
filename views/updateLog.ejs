@@ -1,0 +1,11 @@
+<%- include partials/header -%> 
+
+<h3>Update Log: </h2>
+<form action="/updateLog/<%= log._id %>" method="post">
+  <textarea name="log" cols="40" rows="5" required> <%= log.description %> </textarea>
+  <br>
+  <input type="text" name="name" placeholder="<%= log.name %>" required>
+  <button>Update Log</button>
+</form>
+
+<%- include partials/footer -%> 

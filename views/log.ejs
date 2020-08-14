@@ -9,6 +9,9 @@
 	<% l.description.forEach(function(e) { %>
 		<p><%= e %> </p>
 	<% }) %>
+	<form action="/updateLog/<%= l._id %>" method="GET">
+	<button>Update log</button>
+	</form>
 	</div>
 <% }) %>
 
