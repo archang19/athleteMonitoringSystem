@@ -1,7 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  max-width: 800px;
+  width: 800px;
   margin: auto;
 }
 
@@ -13,11 +13,6 @@ a {
 	margin-bottom: 25px;
 }
 
-.logDate {
-	font-style: italic;
-}
-
 th, td {
 	border: 1px solid black;
-	width: 800px;
 }

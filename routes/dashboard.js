@@ -43,7 +43,6 @@ router.post("/confirmCoach/:username", function(req, res) {
 	    }
 	    else {
 	      console.log(success2);
-	      // res.redirect("/dashboard");
 	    }
 	});
   Connection.remove({coach: req.params.username, athlete: req.user.username}, function(err, c) {
