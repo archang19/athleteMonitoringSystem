@@ -44,6 +44,23 @@ router.post("/", function(req, res) {
 	});
 });
 
+router.post("/setSheet/:username", isLoggedIn, function(req, res) {
+  console.log(req.body.sheet);
+  User.findOne({username: req.params.username}, function (err, u) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      u.sheet = req.body.sheet;
+      u.setSheet = true;
+      u.save();
+      console.log(u);
+      res.redirect("/log/" + req.params.username);
+    }
+
+  });
+});
+
 router.get("/:usrname", isLoggedIn, function(req, res){
 	console.log(req.params.usrname);
 	Log.find({author: req.params.usrname}, null, {sort: {created: -1}}, function(err, l) {
@@ -52,7 +69,17 @@ router.get("/:usrname", isLoggedIn, function(req, res){
 		}
 		else {
       console.log(l);
-			res.render("log", {log: l, username: req.params.usrname} );
+      var tmp = req.params.usrname;
+      User.findOne({username: tmp}, function (err, s){
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log("Success???");
+          console.log(s);
+          res.render("log", {log: l, username: req.params.usrname, user: s} );
+        }
+      });
 		}
 	});    
 });

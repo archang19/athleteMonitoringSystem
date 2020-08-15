@@ -1,7 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  max-width: 500px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -19,5 +19,5 @@ a {
 
 th, td {
 	border: 1px solid black;
-	width: 500px;
+	width: 800px;
 }

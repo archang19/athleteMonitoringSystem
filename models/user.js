@@ -13,7 +13,9 @@ var UserSchema = Schema({
 		type: Schema.Types.ObjectId,
 		ref: "Log"
 	}
-	]
+	], 
+	sheet: String,
+	setSheet: Boolean
 });
 
 UserSchema.plugin(passportLocalMongoose);
