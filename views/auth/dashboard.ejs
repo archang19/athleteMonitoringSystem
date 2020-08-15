@@ -2,22 +2,35 @@
 
 <h1>u/<%= username %>'s dashboard</h1>
 <a href="/logout">Logout</a>
+
+<h3>Coach Requests: </h3>
+<% coachRequests.forEach(function(r){ %>
+<form action="/dashboard/confirmCoach/<%= r.coach %>", method="POST">
+<button> Confirm u/<%= r.coach %> as coach </button>
+</form>
+ <% }); %>
+
 <h3>My Athletes: </h2>
-<form action="/dashboard" method="POST">
+<form action="/dashboard/requestAthlete" method="POST">
 <input type="text" name="athleteUsername" placeholder="athlete's username">
 <button>Add Athlete</button>
 </form>
+
 <ul>
 <% athletes.forEach(function(athlete){ %>
+	<li>
 	<a href="/log/<%= athlete.username %>" > <%= athlete.firstName %> <%= athlete.lastName %> </a>
  <% }); %>
+ 	</li>
  </ul>
 
 <h3>My Coaches: </h2>
 <ul>
 <% coaches.forEach(function(coach){ %>
+	<li>
 	<a href="/log/<%= coach.username %>" > <%= coach.firstName %> <%= coach.lastName %> </a>
  <% }); %>
+ 	</li>
  </ul>
 
 <h3>My Training: </h2>

@@ -7,7 +7,6 @@ var mongoose = require('mongoose'), Schema = mongoose.Schema;
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
 
-
 var User = require("./models/user");
 var Log = require("./models/log");
 
