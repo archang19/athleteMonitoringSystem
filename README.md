@@ -1,9 +1,14 @@
-# Athlete Monitoringt System
+# Athlete Monitoring System
 
-A web application for coaches to monitor their athletes' training, built using 
-MongoDB, Express JS, and Node JS.
+A web application for coaches to monitor their athletes' training,
+built using MongoDB, Express JS, and Node JS. Upon registering,
+coaches can send a connection request to their athletes. After
+athletes confirm their coach, their coach can now view and update
+their training logs. Coaches can chooose to either utilize the
+built-in training log feature, or they can simply add the link to a
+shareable Google Sheet, which will be rendered within the application.
 
-To Run:
+## To Run:
 
 Pre-requisite: Node.js must be installed
 
@@ -20,10 +25,10 @@ npm install
 
 For macOS or Linux, run the application using this command:
 ```
-DEBUG=express-athleteMonitoringSystem:* npm start
+DEBUG=athleteMonitoringSystem:* npm start
 ```
 
-For Windos, use this command insteax:
+For Windows, use this command instead:
 ```
 SET DEBUG=athleteMonitoringSystem:* & npm start
 ```
