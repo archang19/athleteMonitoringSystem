@@ -18,4 +18,14 @@ Then, install all dependencies listed in the package.json file.
 npm install
 ```
 
+For macOS or Linux, run the application using this command:
+```
+DEBUG=express-athleteMonitoringSystem:* npm start
+```
+
+For Windos, use this command insteax:
+```
+SET DEBUG=athleteMonitoringSystem:* & npm start
+```
+
 Finally, load http://localhost:3000/ on your browser.
