@@ -14,6 +14,7 @@ built-in training log feature, or they can simply add the link to a
 shareable Google Sheet, which will be rendered within the application.
 
 <table border="1" width="100%">
+	![test](https://github.com/archang19/athleteMonitoringSystem/blob/master/demoImages/loginPage.png)
 	<tr>
 		<img src="demoImages/loginPage.png" width="400">
 	</tr>
