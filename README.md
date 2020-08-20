@@ -15,16 +15,16 @@ shareable Google Sheet, which will be rendered within the application.
 
 <table border="1" width="100%">
 	<tr>
-		<img src="demoImages/loginPage.png" >
+		<img src="demoImages/loginPage.png" width="48">
 	</tr>
 <tr> 
-<img src="demoImages/dashBoard.png" >
+<img src="demoImages/dashBoard.png" width="48">
 </tr>
 <tr>
-<img src="demoImages/viewingTrainingLog.png" >
+<img src="demoImages/viewingTrainingLog.png" width="48">
 </tr>
 <tr>
-<img src="demoImages/useGoogleSheets.png" >
+<img src="demoImages/useGoogleSheets.png" width="48" >
 </tr>
 </table>
 
