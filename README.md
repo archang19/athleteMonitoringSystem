@@ -1,12 +1,25 @@
 # Athlete Monitoring System
 
 A web application for coaches to monitor their athletes' training,
-built using MongoDB, Express.js, and Node.js. Upon registering,
+built using MongoDB, Express.js, and Node.js. 
+
+
+
+
+Upon registering,
 coaches can send a connection request to their athletes. After
 athletes confirm their coach, their coach can now view and update
 their training logs. Coaches can chooose to either utilize the
 built-in training log feature, or they can simply add the link to a
 shareable Google Sheet, which will be rendered within the application.
+
+<img src="demoImages/loginPage.png" >
+<img src="demoImages/dashBoard.png" >
+<img src="demoImages/viewingTrainingLog.png" >
+<img src="demoImages/useGoogleSheets.png" >
+
+
+
 
 ## To Run:
 
