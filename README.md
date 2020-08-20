@@ -13,12 +13,20 @@ their training logs. Coaches can chooose to either utilize the
 built-in training log feature, or they can simply add the link to a
 shareable Google Sheet, which will be rendered within the application.
 
-<img src="demoImages/loginPage.png" >
+<table border="1" width="100%">
+	<tr>
+		<img src="demoImages/loginPage.png" >
+	</tr>
+<tr> 
 <img src="demoImages/dashBoard.png" >
+</tr>
+<tr>
 <img src="demoImages/viewingTrainingLog.png" >
+</tr>
+<tr>
 <img src="demoImages/useGoogleSheets.png" >
-
-
+</tr>
+</table>
 
 
 ## To Run:
