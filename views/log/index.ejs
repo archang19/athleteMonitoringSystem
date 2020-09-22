@@ -19,52 +19,42 @@
 
 <% log.forEach(function(l){ %>
 <div class = "log">
-	<p> Session: <%= l.name %> </p>
-	<p> Completed: <%= l.completed %> </p>
-	<p> <%= l.description %> </p>
-	<p id="blah"> </p>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script>
-		var d = "<%= l.details %>";
-		var e = $.csv.toArrays("hello,10,20");
-		document.getElementById('blah').innerHTML = "HLLL";
-	</script>
 	<table>
 		<tr>
-			<td>
-				Exercise
-			</td>
-			<td>
-				Sets
-			</td>
-			<td>
-				Reps
-			</td>
-			<td>
-				Weight
-			</td>
+			<td> Name: <%= l.name %> </td>
+			<td>Comments: <%= l.description %> </td>
 		</tr>
-		<% l.tabularDetails.forEach(function(e) { %>
-			<tr>
-				<td><%= e[0] %> </td>
-				<td><%= e[1] %> </td>
-				<td><%= e[2] %> </td>
-				<td><%= e[3] %> </td>
-			</tr>
-		<% }) %>
 		<tr>
-			<td>
-				<form action="/log/<%= l.author %>/updateLog/<%= l._id %>" method="GET">
-					<button>Update</button>
-				</form>
-			</td>	
-			<td>
-				<form action="/log/<%= l.author %>/deleteLog/<%= l._id %>" method="POST">
-					<button>Delete</button>
-				</form>
-			</td>
+			<td> Completed: <%= l.completed %> </td>
+		</tr>
+		<tr>	
+			<table>
+				<tr>
+					<th> Exercise </th>
+					<th> Sets </th>
+					<th> Reps </th>
+					<th> Weight </th>
+					<th> RPE </th>
+				</tr>
+				<% l.tabularDetails.forEach(function(e) { %>
+					<tr>
+						<td><%= e[0] %> </td>
+						<td><%= e[1] %> </td>
+						<td><%= e[2] %> </td>
+						<td><%= e[3] %> </td>
+						<td><%= e[4] %> </td>
+					</tr>
+				<% }) %>
+			</table>
 		</tr>
 	</table>
+
+	<form action="/log/<%= l.author %>/updateLog/<%= l._id %>" method="GET">
+		<button>Update</button>
+
+	<form action="/log/<%= l.author %>/deleteLog/<%= l._id %>" method="POST">
+		<button>Delete</button>
+	</form>
 </div>
 
 <% }) %>

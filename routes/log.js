@@ -97,23 +97,10 @@ router.post("/:usrname/updateLog/:id", isLoggedIn, function(req, res) {
         console.log(err);
       }
       else {
-        var desc = [];
-        console.log(l);
-        var curDesc = "";
-        console.log(req.body.log);
-        
-        for (var k = 0; k < req.body.log.length; k++) {
-          if (req.body.log[k] == '\n' || req.body.log[k] == '\r') {
-            desc.push(curDesc);
-            curDesc = "";
-          }
-          else {
-            curDesc += req.body.log[k];
-          }
-        }
-        desc.push(curDesc);
-        l.name = req.body.name;
-        l.description = desc;
+        l.details = req.body.details;
+        l.description = req.body.description;
+        l.tabularDetails = csv.toArrays(l.details);
+
         l.save();
         console.log(l);
         res.redirect("/log/" + l.author);

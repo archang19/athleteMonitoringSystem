@@ -2,7 +2,11 @@
 
 <h3>Update Log: </h2>
 <form action="/log/<%= log.author %>/updateLog/<%= log._id %>" method="post">
-  <textarea name="log" cols="40" rows="5" required> <%= log.description %> </textarea>
+  <p> Workout </p>
+  <textarea name="details" cols="40" rows="5" required> <%= log.details %> </textarea>
+  <br>
+  <p> Notes </p>
+  <textarea name="description" cols="40" rows="3" required> <%= log.description %> </textarea>
   <br>
   <input type="text" name="name" placeholder="<%= log.name %>" required>
   <button>Update Log</button>
