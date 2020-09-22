@@ -3,6 +3,7 @@ var passport = require("passport");
 var router = express.Router();
 var User = require("../models/user");
 var Log = require("../models/log");
+var csv = require('jquery-csv');
 
 router.post("/", function(req, res) {
 	User.findOne({username: req.user.username}, function(err, usr) {
@@ -11,26 +12,14 @@ router.post("/", function(req, res) {
 			res.redirect("/");
 		}
 		else {
-      var desc = [];
-      var curDesc = "";
-      for (var k = 0; k < req.body.log.length; k++) {
-        if (req.body.log[k] == '\n' || req.body.log[k] == '\r') {
-          desc.push(curDesc);
-          curDesc = "";
-        }
-        else {
-          curDesc += req.body.log[k];
-        }
-      }
-      desc.push(curDesc);
-
-			Log.create({description: desc, name: req.body.name, completed: req.body.completed}, function (err, l) {
+			Log.create({description: req.body.notes, details: req.body.details, name: req.body.name, completed: req.body.completed}, function (err, l) {
 				if (err) {
 					console.log(err);
 				}
 				else {
 					l.author= req.user.username;
           l.created = new Date().toISOString();
+          l.tabularDetails = csv.toArrays(l.details);
 					l.save();
 					console.log(l);
 					console.log(usr);
@@ -76,7 +65,6 @@ router.get("/:usrname", isLoggedIn, function(req, res){
         }
         else {
           console.log("Success???");
-          console.log(s);
           res.render("log", {log: l, username: req.params.usrname, user: s} );
         }
       });
@@ -93,6 +81,9 @@ router.get("/:usrname/updateLog/:id", isLoggedIn, function(req, res){
         console.log(err);
       }
       else {
+        console.log("CSV To Array? ")
+        console.log(l.description);
+        console.log(csv.toArrays(l.description[0]))
         res.render("log/updateLog", {log: l});
       }
     });    
@@ -110,6 +101,7 @@ router.post("/:usrname/updateLog/:id", isLoggedIn, function(req, res) {
         console.log(l);
         var curDesc = "";
         console.log(req.body.log);
+        
         for (var k = 0; k < req.body.log.length; k++) {
           if (req.body.log[k] == '\n' || req.body.log[k] == '\r') {
             desc.push(curDesc);
