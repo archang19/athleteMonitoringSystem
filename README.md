@@ -8,6 +8,7 @@ their training logs. Coaches can chooose to either utilize the
 built-in training log feature, or they can simply add the link to a
 shareable Google Sheet, which will be rendered within the application.
 
+## Demo Images:
 <img src="demoImages/dashBoard.png" width="800">
 <img src="demoImages/trainingLog.png" width="800">
 

@@ -1,12 +1,32 @@
 <%- include ../partials/header -%> 
 
-<h1> u/<%= username %>'s training log</h1>
-<a href="/dashboard">Back to dashboard</a>
 
-<form action="/log/setSheet/<%= username %>" method="POST">
-<input type="url" name="sheet" placeholder="Shareable Url Link">
-<button>Set Google Sheet</button>
-</form>
+<div class="topBar">
+	<table>
+	  <tr>
+		<td>
+			<h1> u/<%= username %>'s training log</h1>
+		</td>
+		<td>
+			<a href="/dashboard">Back to dashboard</a>
+		</td>
+		<form action="/log/setSheet/<%= username %>" method="POST">	
+			<td>
+				<input type="url" name="sheet" placeholder="Shareable Url Link">
+			</td>
+			<td>
+				<button>Set Google Sheet</button>
+			</td>
+		</form>	
+	  </tr>
+	</table>
+  </div>
+
+
+
+
+
+
 <br>
 
 <% if (user.setSheet) { %>
