@@ -8,41 +8,8 @@ their training logs. Coaches can chooose to either utilize the
 built-in training log feature, or they can simply add the link to a
 shareable Google Sheet, which will be rendered within the application.
 
-<table border="1" width="100%">
-	<tr>
-		<td>
-			<img src="demoImages/loginPage.png" width="400">
-		</td>
-		<td>
-			<img src="demoImages/dashBoard.png" width="400">
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<img src="demoImages/viewTrainingLog.png" width="400">
-		</td>
-		<td>
-			<img src="demoImages/addingTrainingLog.png" width="400">
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<img src="demoImages/useGoogleSheets.png" width="400" >
-		</td>
-		<td> 
-			<img src="demoImages/addingAthlete.png" width="400" >
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<img src="demoImages/confirmingCoach.png" width="400" >
-		</td>
-		<td>
-			<img src="demoImages/seeingCoach.png" width="400" >
-		</td>
-	</tr>
-</table>
-
+<img src="demoImages/dashBoard.png" width="800">
+<img src="demoImages/trainingLog.png" width="800">
 
 ## To Run:
 
