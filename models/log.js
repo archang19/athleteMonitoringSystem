@@ -7,7 +7,7 @@ var LogSchema = Schema({
 	author: String,
 	name: String,
 	created: Date,
-	completed: String
+	completed: Date
 });
 
 module.exports = mongoose.model('Log', LogSchema);

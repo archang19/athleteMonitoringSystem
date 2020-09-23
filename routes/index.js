@@ -16,6 +16,7 @@ router.get("/register", function(req, res){
 router.post("/register", function(req, res){
     var isCoach = false;
     User.register(new User({username: req.body.username, 
+      email: req.body.email,
       firstName: req.body.firstName, 
       lastName: req.body.lastName,}), req.body.password, function(err, user){
         if(err){

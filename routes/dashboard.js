@@ -55,6 +55,17 @@ router.post("/confirmCoach/:username", function(req, res) {
   });
 });
 
+router.post("/ignoreCoach/:username", function(req, res) {
+	Connection.remove({coach: req.params.username, athlete: req.user.username}, function(err, c) {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			res.redirect("/dashboard");
+		}
+	});
+  });
+
 
 router.post("/requestAthlete", function(req, res) {
   console.log(req.body.athleteUsername);

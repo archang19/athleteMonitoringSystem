@@ -14,6 +14,7 @@ var UserSchema = Schema({
 		ref: "Log"
 	}
 	], 
+	email: String,
 	sheet: String,
 	setSheet: Boolean
 });

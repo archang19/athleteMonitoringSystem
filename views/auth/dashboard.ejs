@@ -1,51 +1,119 @@
 <%- include ../partials/header -%> 
 
-<h1>u/<%= username %>'s dashboard</h1>
-<a href="/logout">Logout</a>
+<div class="topBar">
+  <table>
+    <tr>
+      <td>
+        <h1>u/<%= username %>'s dashboard</h1>
+      </td>
+      <td>
+        <a href="/logout">Logout</a>
+      </td>
+    </tr>
+  </table>
+</div>
 
-<h3>Coach Requests: </h3>
-<% coachRequests.forEach(function(r){ %>
-<form action="/dashboard/confirmCoach/<%= r.coach %>", method="POST">
-<button> Confirm u/<%= r.coach %> as coach </button>
-</form>
- <% }); %>
+ <div class="coachRequests">
+  <table>
+    <caption>Coach Requests </caption>
+    <tr>
+			<th> Athlete Username </th>
+      <th> Confirm </th>
+      <th> Ignore </th>
+		</tr>
+    <% coachRequests.forEach(function(r){ %>
+      <tr>
+        <td> <%= r.coach %> </td>
+        <td> 
+          <form action="/dashboard/confirmCoach/<%= r.coach %>", method="POST">
+            <button> Confirm</button>
+          </form>
+        </td>
+        <td>
+          <form action="/dashboard/ignoreCoach/<%= r.coach %>", method="POST">
+            <button>Ignore</button>
+          </form>
+        </td>
+      </tr>
+    
+       <% }); %>
+  </table>
+</div>
 
-<h3>My Athletes: </h2>
-<form action="/dashboard/requestAthlete" method="POST">
-<input type="text" name="athleteUsername" placeholder="athlete's username">
-<button>Add Athlete</button>
-</form>
+<div class="familyCards">
+  <table>
+    <caption>My Family </caption>
+    <tr>
+      <th> Relationship </th>
+			<th> First Name </th>
+      <th> Last Name  </th>
+      <th> Email </th>
+      <th> Username  </th>
+		</tr>
+    <% for (var i = 0; i < athletes.length;  i++ ) { %>
+      <tr>
+        <td> Athlete </td>
+        <td> <%= athletes[i].firstName %> </td>
+        <td> <%= athletes[i].lastName %> </td>
+        <td> <%= athletes[i].email %> </td>
+        <td> <a href="/log/<%= athletes[i].username %>"> <%= athletes[i].username %> </a></td>
+      </tr>
+      <% } %>
+    <% for (var i = 0; i < coaches.length;  i++ ) { %>
+        <tr>
+          <td> Coach </td>
+          <td> <%= coaches[i].firstName %> </td>
+          <td> <%= coaches[i].lastName %> </td>
+          <td> <%= coaches[i].email %> </td>
+          <td> <%= coaches[i].username %> </td>
+        </tr>
+    <% } %>
+    <tr>
+      <td colspan="5"> 
+        <form action="/dashboard/requestAthlete" method="POST">
+          <input type="text" name="athleteUsername" placeholder="athlete's username">
+          <button>Add Athlete</button>
+          </form>
+      </td>
+    </tr>
+  </table>
+</div>
 
-<ul>
-<% athletes.forEach(function(athlete){ %>
-	<li>
-	<a href="/log/<%= athlete.username %>" > <%= athlete.firstName %> <%= athlete.lastName %> </a>
- <% }); %>
- 	</li>
- </ul>
-
-<h3>My Coaches: </h2>
-<ul>
-<% coaches.forEach(function(coach){ %>
-	<li>
-	<a href="/log/<%= coach.username %>" > <%= coach.firstName %> <%= coach.lastName %> </a>
- <% }); %>
- 	</li>
- </ul>
-
-<h3>My Training: </h2>
 <form action="/log" method="POST">
-  <p> Workout </p>
-  <textarea name="details" cols="40" rows="5" required>[Exercise],[Sets],[Reps],[Weight],[RPE]</textarea>
-  <br>
-  <p> Notes </p>
-  <textarea name="notes" cols="40" rows="3" required>Squats felt good!</textarea>
-  <br>
-  <input type="text" name="name" placeholder="Name of Workout" required>
-  <input type="text" name="completed" placeholder="Date Completed" required>
-  <br>
-  <button>Log Training</button>
+  <div class="logTrainingSession">
+    <table>
+      <caption>My Training</caption>
+      <tr>
+        <th>Block</th>
+        <th>Week</th>
+        <th>Day</th>
+        <th>Completed</th>
+      </tr>
+      <tr>
+        <td><input type="number" id="block" name="block" min=1 required></td>
+        <td><input type="number" id="week" name="week" min=1 required></td>
+        <td><input type="number" id="day" name="day" min=1 required></td>
+        <td><input type="date" id="completed" name="completed" required></td>
+      </tr>
+      <tr>  
+        <td colspan="4"> 
+          <label for="notes">Notes:</label>
+          <textarea id="notes" name="notes" cols="75" rows="3" required>Squats felt good!</textarea> 
+        </td>
+      </tr>
+      <tr>  
+        <td colspan="4"> 
+          <label for="details">Details:</label>
+          <textarea id="details" name="details" cols="75" rows="5" required>[Exercise],[Sets],[Reps],[Weight],[RPE]</textarea>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"> <button>Log Training</button> </td>
+        <td colspan="2"> <a href="/log/<%= username %>" >View Training Log</a> </td>
+      </tr>
+    </table>
+  </div>
 </form>
-<a href="/log/<%= username %>" >View Training Log</a>
+
 
 <%- include ../partials/footer -%> 

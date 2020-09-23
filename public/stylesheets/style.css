@@ -1,17 +1,41 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  width: 50%;
+html, body {
+  height: 100%;
+}
+
+html {
+  display: table;
   margin: auto;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
 
-.log {
+label {
+  display: block;
+}
+
+input, label {
+  margin: .4rem 0;
+}
+
+textarea {
+  resize: none;
+}
+
+.log, .familyCards, .logTrainingSession, .coachRequests, .topBar {
   margin-bottom: 25px;
   border: 1px solid #ddd;
+}
+
+table {
+  width: 100%;
 }
 
 td, th {

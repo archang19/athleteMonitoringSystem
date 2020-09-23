@@ -3,11 +3,21 @@
 <h1>New User Registration</h1>
 
 <form action="/register" method="POST">
-    <input type="text" name="username" placeholder="username" minlength=5 maxlength=10>
-    <input type="password" name="password" placeholder="password" minlength=5 maxlength=10><br>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="conventional" minlength=5 maxlength=10>
 
-    <input type="text" name="firstName" placeholder="firstName">
-    <input type="text" name="lastName" placeholder="lastName"><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="deadlift" minlength=5 maxlength=10>
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="Bryce">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" placeholder="Lewis">
+
+    <label for="email">Gmail:</label>
+    <input type="email" id="email" name="email" pattern=".+@gmail.com" placeholder="tempoSquat@gmail.com" required>
+    <br>
     <button>Submit</button>
 </form>
 <br></br>
