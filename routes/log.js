@@ -144,14 +144,11 @@ router.get("/:usrname/updateLog/:id", isLoggedIn, function(req, res){
 });
 
 router.post("/:usrname/updateLog/:id", isLoggedIn, function(req, res) {
-    console.log("PATCH");
-    console.log(req.params.id);
     Log.findById(req.params.id, function(err, l) {
       if (err) {
         console.log(err);
       }
       else {
-
         curTabularDetails = []
 
         var i = 0;
