@@ -1,114 +1,71 @@
-<%- include ../partials/header -%> 
+class DashBoardForm extends React.Component {
+    
+    state = {
+        entries: [{exercise:"", sets:"", reps:"", weight:"", rpe:"" }],
+        block: "",
+        week: "",
+        day: "",
+        completed: new Date()
+    }
 
-<h3>Update Log </h2>
-  
-<div id="containerUpdateLog"></div>
-<script type="text/babel">
-  
-  class UpdateForm extends React.Component {
-      
-    constructor(props) {
-      super(props);
-      this.state = {
-        entries: [      ],
-        block: "<%= log.block %>",
-        week: " <%= log.week %>",
-        day: " <%= log.day %>",
-      };
-    }
-  
-  
-    componentDidMount() {
-      var t = "<%= log.tabularDetails %>";
-      var pastEntries = t.split(",");
-      if (pastEntries.length > 5) {
-        for (var j = 0; j < pastEntries.length; j += 5) {
-          var curE = pastEntries[j];
-          var curS = pastEntries[j+1];
-          var curR = pastEntries[j+2];
-          var curW = pastEntries[j+3];
-          var curP = pastEntries[j+4];
-  
-          this.dummyRestore(curE, curS, curR, curW, curP);
-        }
-      }
-      else {
-        this.setState(prevState => ({
-          entries: [...prevState.entries, {exercise:t.split(",")[0], sets:t.split(",")[1], reps:t.split(",")[2], weight:t.split(",")[3], rpe:t.split(",")[4]}],
-        })
-      
-      
-      );
-      }
-      
-    }
-  
-    dummyRestore(curE, curS, curR, curW, curP) {
-      this.setState(prevState => ({
-        entries: [...prevState.entries, {exercise:curE, sets:curS, reps:curR, weight:curW, rpe:curP} ],
-      }));
-    }
-  
-      handleChange = (e) => {
-          if (["exercise", "sets", "reps", "weight", "rpe"].includes(e.target.className) ) {
+    handleChange = (e) => {
+        if (["exercise", "sets", "reps", "weight", "rpe"].includes(e.target.className) ) {
             let entries= [...this.state.entries]
             entries[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
             this.setState({ entries }, () => console.log(this.state.entries))
-          } else {
+        } else {
             this.setState({ [e.target.name]: e.target.value.toUpperCase() })
-          }
         }
-  
-  
-  
-      addEntry = (e) => {
-          this.setState((prevState) => ({
+        }
+
+    addEntry = (e) => {
+        this.setState((prevState) => ({
             entries: [...prevState.entries, {exercise:"", sets:"", reps:"", weight:"", rpe:""}],
-          }));
-          e.preventDefault() 
+        }));
+        e.preventDefault() 
         }
-      
-      render() {
-          let {entries,block,week,day,completed} = this.state
-          return (
-            <form onChange={this.handleChange} action="/log/<%= log.author %>/updateLog/<%= log._id %>" method="POST">
-              <table>
+    
+    render() {
+        let {entries,block,week,day,completed} = this.state
+        return (
+            <form onChange={this.handleChange} action="/log/react" method="POST">
+            <table>
                 <caption>Session Overview</caption>
                 <tr>
-                  <td> 
+                <td> 
                     <label htmlFor="block">Block</label>
                     <input type="text" name="block" id="block" value={block} /> 
-                  </td>
-                  <td> 
+                </td>
+                <td> 
                     <label htmlFor="week">Week</label>
                     <input type="text" name="week" id="week" value={week} /> 
-                  </td>
-                  <td> 
+                </td>
+                <td> 
                     <label htmlFor="day">Day</label>
                     <input type="text" name="day" id="day" value={day} /> 
-                  </td>
-                  <td> 
+                </td>
+                <td> 
                     <label htmlFor="completed">Date Completed</label>
-                    <input type="date" name="completed" id="completed" placeholder= "<%= log.completed %>" value={completed} /> 
-                  </td>
+                    <input type="date" name="completed" id="completed" value={completed} /> 
+                </td>
                 </tr>
-  
-              </table>
-  
-  
-              <table>
+
+            </table>
+
+
+            <table>
                 <caption>Session Details</caption>
                 <tr>  
-                  <td colspan="5"> 
+                <td colspan="5"> 
                     <label for="notes">Notes:</label>
                     <textarea id="notes" name="notes" cols="75" rows="3" required>Squats felt good!</textarea> 
-                  </td>
+                </td>
                 </tr>
                 {
-                  entries.map((val, idx)=> {
+                entries.map((val, idx)=> {
                     let exerciseId = `exercise-${idx}`, setId = `set-${idx}`, repId = `rep-${idx}`, weightId = `weight-${idx}`, rpeId = `rpe-${idx}`
                     return (
-                      <div key={idx}>
+                    <div key={idx}>
                         <tr> 
                             <td>
                                 <label htmlFor={exerciseId}>{`Exercise #${idx + 1}`}</label>
@@ -153,7 +110,7 @@
                                 value={entries[idx].weight} 
                                 className="weight"
                                 />
-                          </td>
+                        </td>
                             <td>
                                 <label htmlFor={rpeId}>RPE</label>
                                 <input
@@ -166,27 +123,20 @@
                                 />
                             </td>
                         </tr>  
-                      </div>
+                    </div>
                     )
-                  })
+                })
                 }
                 <tr>
-                  <td> <button onClick={this.addEntry}>Add new entry</button> </td>
+                <td> <button onClick={this.addEntry}>Add new entry</button> </td>
                 </tr>
                 <tr>
-                <td> <input type="submit" value="Update" />  </td>
+                <td> <input type="submit" value="Submit" />  </td>
                 </tr>
-              </table>
-              
-              
+            </table>
             </form>
-          )
+        )
         }
     }
     
-  ReactDOM.render(<UpdateForm />, document.getElementById('containerUpdateLog'));
-  
-  </script>
-
-
-<%- include ../partials/footer -%> 
+ReactDOM.render(<DashBoardForm />, document.getElementById('containerDashBoard'));
