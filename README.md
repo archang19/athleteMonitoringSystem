@@ -9,7 +9,14 @@ built-in training log feature, or they can simply add the link to a
 shareable Google Sheet, which will be rendered within the application.
 
 ## Demo Images:
+
+Easily manage coach/athlete relationships with access control.
 <img src="demoImages/dashBoard.png" width="800">
+
+Flexibly log training sessions.
+<img src="demoImages/addSession.png" width="800">
+
+Quickly monitor and update training logs.
 <img src="demoImages/trainingLog.png" width="800">
 
 ## To Run:
