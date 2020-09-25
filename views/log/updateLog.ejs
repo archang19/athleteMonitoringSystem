@@ -1,6 +1,199 @@
 <%- include ../partials/header -%> 
 
+
 <h3>Update Log: </h2>
+
+
+  <div id="container"></div>
+
+  <script type="text/babel">
+  
+      class Form extends React.Component {
+          
+        constructor(props) {
+          super(props);
+          this.state = {
+            entries: [      ],
+            block: "<%= log.block %>",
+            week: " <%= log.week %>",
+            day: " <%= log.day %>",
+          };
+        }
+
+
+        componentDidMount() {
+          var t = "<%= log.tabularDetails %>";
+          var pastEntries = t.split(",");
+          if (pastEntries.length > 5) {
+            for (var j = 0; j < pastEntries.length; j += 5) {
+              var curE = pastEntries[j];
+              var curS = pastEntries[j+1];
+              var curR = pastEntries[j+2];
+              var curW = pastEntries[j+3];
+              var curP = pastEntries[j+4];
+
+              this.dummyRestore(curE, curS, curR, curW, curP);
+            }
+          }
+          else {
+            this.setState(prevState => ({
+              entries: [...prevState.entries, {exercise:t.split(",")[0], sets:t.split(",")[1], reps:t.split(",")[2], weight:t.split(",")[3], rpe:t.split(",")[4]}],
+            })
+          
+          
+          );
+          }
+          
+        }
+
+        dummyRestore(curE, curS, curR, curW, curP) {
+          this.setState(prevState => ({
+            entries: [...prevState.entries, {exercise:curE, sets:curS, reps:curR, weight:curW, rpe:curP} ],
+          }));
+        }
+
+          handleChange = (e) => {
+              if (["exercise", "sets", "reps", "weight", "rpe"].includes(e.target.className) ) {
+                let entries= [...this.state.entries]
+                entries[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
+                this.setState({ entries }, () => console.log(this.state.entries))
+              } else {
+                this.setState({ [e.target.name]: e.target.value.toUpperCase() })
+              }
+            }
+
+
+  
+          addEntry = (e) => {
+              this.setState((prevState) => ({
+                entries: [...prevState.entries, {exercise:"", sets:"", reps:"", weight:"", rpe:""}],
+              }));
+              e.preventDefault() 
+            }
+          
+          render() {
+              let {entries,block,week,day,completed} = this.state
+              return (
+                <form onChange={this.handleChange} action="/log/<%= log.author %>/updateLog/<%= log._id %>" method="POST">
+                  <table>
+                    <caption>Session Overview</caption>
+                    <tr>
+                      <td> 
+                        <label htmlFor="block">Block</label>
+                        <input type="text" name="block" id="block" value={block} /> 
+                      </td>
+                      <td> 
+                        <label htmlFor="week">Week</label>
+                        <input type="text" name="week" id="week" value={week} /> 
+                      </td>
+                      <td> 
+                        <label htmlFor="day">Day</label>
+                        <input type="text" name="day" id="day" value={day} /> 
+                      </td>
+                      <td> 
+                        <label htmlFor="completed">Date Completed</label>
+                        <input type="date" name="completed" id="completed" placeholder= "<%= log.completed %>" value={completed} /> 
+                      </td>
+                    </tr>
+  
+                  </table>
+  
+  
+                  <table>
+                    <caption>Session Details</caption>
+                    <tr>  
+                      <td colspan="5"> 
+                        <label for="notes">Notes:</label>
+                        <textarea id="notes" name="notes" cols="75" rows="3" required>Squats felt good!</textarea> 
+                      </td>
+                    </tr>
+                    {
+                      entries.map((val, idx)=> {
+                        let exerciseId = `exercise-${idx}`, setId = `set-${idx}`, repId = `rep-${idx}`, weightId = `weight-${idx}`, rpeId = `rpe-${idx}`
+                        return (
+                          <div key={idx}>
+                            <tr> 
+                                <td>
+                                    <label htmlFor={exerciseId}>{`Exercise #${idx + 1}`}</label>
+                                    <input
+                                    type="text"
+                                    name={exerciseId}
+                                    data-id={idx}
+                                    id={exerciseId}
+                                    value={entries[idx].exercise} 
+                                    className="exercise"
+                                    />
+                                </td>
+                                <td>
+                                    <label htmlFor={setId}>Sets</label>
+                                    <input
+                                    type="text"
+                                    name={setId}
+                                    data-id={idx}
+                                    id={setId}
+                                    value={entries[idx].sets} 
+                                    className="sets"
+                                    />
+                                </td>
+                                <td>
+                                    <label htmlFor={repId}>Reps</label>
+                                    <input
+                                    type="text"
+                                    name={repId}
+                                    data-id={idx}
+                                    id={repId}
+                                    value={entries[idx].reps} 
+                                    className="reps"
+                                    />
+                                </td>
+                                <td>
+                                    <label htmlFor={weightId}>Weight</label>
+                                    <input
+                                    type="text"
+                                    name={weightId}
+                                    data-id={idx}
+                                    id={weightId}
+                                    value={entries[idx].weight} 
+                                    className="weight"
+                                    />
+                              </td>
+                                <td>
+                                    <label htmlFor={rpeId}>RPE</label>
+                                    <input
+                                    type="text"
+                                    name={rpeId}
+                                    data-id={idx}
+                                    id={rpeId}
+                                    value={entries[idx].rpe} 
+                                    className="rpe"
+                                    />
+                                </td>
+                            </tr>  
+                          </div>
+                        )
+                      })
+                    }
+                    <tr>
+                      <td> <button onClick={this.addEntry}>Add new entry</button> </td>
+                    </tr>
+                    <tr>
+                    <td> <input type="submit" value="Update" />  </td>
+                    </tr>
+                  </table>
+                  
+                  
+                </form>
+              )
+            }
+        }
+        
+      ReactDOM.render(<Form />, document.getElementById('container'));
+  
+  </script>
+
+
+
+
 <form action="/log/<%= log.author %>/updateLog/<%= log._id %>" method="post">
   <p> Workout </p>
   <textarea name="details" cols="40" rows="5" required> <%= log.details %> </textarea>

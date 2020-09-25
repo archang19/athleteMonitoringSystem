@@ -2,10 +2,11 @@ var mongoose = require('mongoose'), Schema = mongoose.Schema;
 
 var LogSchema = Schema({
 	description: String, 
-	details: String,
+	block: String,
+	week: String,
+	day: String,
 	tabularDetails: [[]],
 	author: String,
-	name: String,
 	created: Date,
 	completed: Date
 });

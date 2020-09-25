@@ -33,6 +33,63 @@ router.post("/", function(req, res) {
 	});
 });
 
+router.post("/react", function(req, res) {
+  console.log("BODY")
+  console.log(req.body);
+
+  User.findOne({username: req.user.username}, function(err, usr) {
+		if (err) {
+			console.log(err);
+			res.redirect("/");
+		}
+		else {
+      curTabularDetails = []
+
+      var i = 0;
+      while (1)
+      {
+        var exerciseTerm = "exercise-" + String(i);
+        var setTerm = "set-" + String(i);
+        var repTerm = "rep-" + String(i);
+        var weightTerm = "weight-" + String(i);
+        var rpeTerm = "rpe-" + String(i);
+    
+        if (req.body[exerciseTerm]) {
+          console.log(i);
+          curTabularDetails.push([req.body[exerciseTerm], req.body[setTerm], req.body[repTerm], req.body[weightTerm] , req.body[rpeTerm] ]);
+          i = i + 1;
+        }
+        else {
+          break;
+        }
+    
+      }
+
+			Log.create({description: req.body.notes, completed: req.body.completed, block: req.body.block, week: req.body.week, day: req.body.day}, function (err, l) {
+				if (err) {
+					console.log(err);
+				}
+				else {
+					l.author= req.user.username;
+          l.created = new Date().toISOString();
+          l.tabularDetails = curTabularDetails;
+
+					l.save();
+					console.log(l);
+					console.log(usr);
+					usr.log.push(l);
+					usr.save();
+					console.log(usr);
+					res.redirect("/dashboard");
+				}
+			});
+		}
+  });
+
+});
+
+
+
 router.post("/setSheet/:username", isLoggedIn, function(req, res) {
   console.log(req.body.sheet);
   User.findOne({username: req.params.username}, function (err, u) {
@@ -81,9 +138,6 @@ router.get("/:usrname/updateLog/:id", isLoggedIn, function(req, res){
         console.log(err);
       }
       else {
-        console.log("CSV To Array? ")
-        console.log(l.description);
-        console.log(csv.toArrays(l.description[0]))
         res.render("log/updateLog", {log: l});
       }
     });    
@@ -97,9 +151,30 @@ router.post("/:usrname/updateLog/:id", isLoggedIn, function(req, res) {
         console.log(err);
       }
       else {
-        l.details = req.body.details;
+
+        curTabularDetails = []
+
+        var i = 0;
+        while (1)
+        {
+          var exerciseTerm = "exercise-" + String(i);
+          var setTerm = "set-" + String(i);
+          var repTerm = "rep-" + String(i);
+          var weightTerm = "weight-" + String(i);
+          var rpeTerm = "rpe-" + String(i);
+      
+          if (req.body[exerciseTerm]) {
+            console.log(i);
+            curTabularDetails.push([req.body[exerciseTerm], req.body[setTerm], req.body[repTerm], req.body[weightTerm] , req.body[rpeTerm] ]);
+            i = i + 1;
+          }
+          else {
+            break;
+          }
+        }
+
+        l.tabularDetails = curTabularDetails;
         l.description = req.body.description;
-        l.tabularDetails = csv.toArrays(l.details);
 
         l.save();
         console.log(l);
